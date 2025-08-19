@@ -10,7 +10,8 @@
   },
   "bin": {
     "add-ui": "./scripts/shadcn.mjs",
-    "migrate": "./scripts/migrate.mjs"
+    "migrate": "./scripts/migrate.mjs",
+    "seed": "./scripts/seed.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
