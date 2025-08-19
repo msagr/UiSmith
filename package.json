@@ -12,6 +12,9 @@
     "add-ui": "./scripts/shadcn.mjs",
     "migrate": "./scripts/migrate.mjs"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
     "@prisma/client": "^6.14.0",
