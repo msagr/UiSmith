@@ -11,7 +11,8 @@
   "bin": {
     "add-ui": "./scripts/shadcn.mjs",
     "migrate": "./scripts/migrate.mjs",
-    "seed": "./scripts/seed.mjs"
+    "seed": "./scripts/seed.mjs",
+    "tables": "./scripts/studio.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
