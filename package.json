@@ -12,7 +12,8 @@
     "add-ui": "./scripts/shadcn.mjs",
     "migrate": "./scripts/migrate.mjs",
     "seed": "./scripts/seed.mjs",
-    "tables": "./scripts/studio.mjs"
+    "tables": "./scripts/studio.mjs",
+    "reset-db": "./scripts/resetdb.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
