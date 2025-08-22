@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "npx eslint src/app --ext .js,.jsx,.ts,.tsx --fix"
   },
   "bin": {
     "add-ui": "./scripts/shadcn.mjs",
@@ -59,6 +59,8 @@
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
     "inngest": "^3.40.1",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.540.0",
@@ -83,8 +85,12 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "@typescript-eslint/eslint-plugin": "^8.40.0",
+    "@typescript-eslint/parser": "^8.40.0",
+    "eslint": "^9.33.0",
     "eslint-config-next": "15.3.4",
+    "eslint-plugin-ban": "^2.0.0",
+    "prettier": "^3.6.2",
     "prisma": "^6.14.0",
     "tailwindcss": "^4",
     "tsx": "^4.20.4",
