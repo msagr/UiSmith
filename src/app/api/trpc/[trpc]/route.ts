@@ -1,4 +1,4 @@
-import * as trpcNext from '@trpc/server/adapters/next';
+// import * as trpcNext from '@trpc/server/adapters/next';
 import { appRouter } from '@/trpc/routers/_app';
 // export API handler
 // @link https://trpc.io/docs/v11/server/adapters

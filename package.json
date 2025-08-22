@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build && next export",
     "start": "next start",
-    "lint": "npx eslint src/app --ext .js,.jsx,.ts,.tsx --fix"
+    "lint": "eslint src/app --fix"
   },
   "husky": {
     "hooks": {
@@ -99,11 +99,11 @@
     "sonner": "^2.0.7",
     "superjson": "^2.2.2",
     "tailwind-merge": "^3.3.1",
+    "typescript-eslint": "^8.40.0",
     "vaul": "^1.1.2",
     "zod": "^4.0.17"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

@@ -1,33 +1,37 @@
 import js from '@eslint/js';
-import prettierPlugin from 'eslint-plugin-prettier';
+import tseslint from 'typescript-eslint';
 import nextPlugin from '@next/eslint-plugin-next';
-
-/**
- * Flat config requires plugins as objects with their configs, not arrays of strings.
- * So instead of { plugins: ["@next/next"] }, we do:
- *   plugins: { '@next/next': nextPlugin }
- */
+import prettierPlugin from 'eslint-plugin-prettier';
 
 export default [
   js.configs.recommended,
+  ...tseslint.configs.recommended,
+
   {
-    files: ['app/**/*.{js,jsx,ts,tsx}', 'utils/**/*.{js,jsx,ts,tsx}'],
-    ignores: ['**/*', '!app/**/*', '!utils/**/*'],
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    ignores: ['node_modules', 'dist', '.next'],
     plugins: {
       '@next/next': nextPlugin,
       prettier: prettierPlugin,
     },
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: process.cwd(),
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
     rules: {
-      ...nextPlugin.configs.recommended.rules, // "plugin:@next/next/recommended"
-      ...prettierPlugin.configs.recommended.rules, // "plugin:prettier/recommended"
+      ...nextPlugin.configs.recommended.rules,
+      ...prettierPlugin.configs.recommended.rules,
 
       'prettier/prettier': 'error',
-      // you can also override Next.js rules here if needed
       '@next/next/no-html-link-for-pages': 'warn',
-    },
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
     },
   },
 ];
