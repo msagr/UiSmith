@@ -8,6 +8,29 @@
     "start": "next start",
     "lint": "npx eslint src/app --ext .js,.jsx,.ts,.tsx --fix"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.jsx": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.tsx": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "bin": {
     "add-ui": "./scripts/shadcn.mjs",
     "migrate": "./scripts/migrate.mjs",
@@ -90,6 +113,8 @@
     "eslint": "^9.33.0",
     "eslint-config-next": "15.3.4",
     "eslint-plugin-ban": "^2.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
     "prettier": "^3.6.2",
     "prisma": "^6.14.0",
     "tailwindcss": "^4",
