@@ -1,13 +1,21 @@
+"use client";
+
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
-import { caller } from "@/trpc/server";
+import { useMutation } from "@tanstack/react-query";
 
-export default async function Page() {
-  const data  = await caller.hello({ text: "SERVER CALL"});
+export default function Page() {
+  const trpc = useTRPC();
+  const invoke = useMutation(trpc.invoke.mutationOptions({
+    onSuccess: () => toast.success("Background job started")
+  })); 
 
   return (
     <div>
-      {JSON.stringify(data)}
+      <Button disabled={invoke.isPending} onClick={() => invoke.mutate({ text: "John" })}>
+        Invoke Background Job
+      </Button>
     </div>
   );
 }
