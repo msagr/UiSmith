@@ -1,0 +1,8 @@
+OS: Windows - 11
+
+VS Terminal:
+To use E2B cli will need to install it globally
+
+To Do :
+
+1. Fix act to build deployments locally.
