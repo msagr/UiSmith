@@ -1,0 +1,17 @@
+# This is a config for E2B sandbox template.
+# You can use template ID (3kxfbqv6wi9nghoycybc) or template name (uismith-nextjs) to create a sandbox:
+
+# Python SDK
+# from e2b import Sandbox, AsyncSandbox
+# sandbox = Sandbox("uismith-nextjs") # Sync sandbox
+# sandbox = await AsyncSandbox.create("uismith-nextjs") # Async sandbox
+
+# JS SDK
+# import { Sandbox } from 'e2b'
+# const sandbox = await Sandbox.create('uismith-nextjs')
+
+team_id = "b2c240e9-6bad-4016-be9f-76b0fdc99adf"
+start_cmd = "/compile_page.sh"
+dockerfile = "e2b.Dockerfile"
+template_name = "uismith-nextjs"
+template_id = "3kxfbqv6wi9nghoycybc"
