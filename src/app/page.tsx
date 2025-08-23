@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 
 export default function Page() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   const trpc = useTRPC();
   const invoke = useMutation(
