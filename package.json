@@ -38,7 +38,8 @@
     "tables": "./scripts/studio.mjs",
     "reset-db": "./scripts/resetdb.mjs",
     "inngest-cli": "./scripts/inngest-dev.mjs",
-    "e2b-build": "./scripts/e2b-next-env.mjs"
+    "e2b-build": "./scripts/e2b-next-env.mjs",
+    "e2b-publish": "./scripts/e2b-publish.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
