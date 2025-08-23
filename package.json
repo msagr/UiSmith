@@ -37,12 +37,16 @@
     "seed": "./scripts/seed.mjs",
     "tables": "./scripts/studio.mjs",
     "reset-db": "./scripts/resetdb.mjs",
-    "inngest-cli": "./scripts/inngest-dev.mjs"
+    "inngest-cli": "./scripts/inngest-dev.mjs",
+    "e2b-build": "./scripts/e2b-next-env.mjs",
+    "e2b-publish": "./scripts/e2b-publish.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@e2b/cli": "^2.0.1",
+    "@e2b/code-interpreter": "^2.0.0",
     "@hookform/resolvers": "^5.2.1",
     "@inngest/agent-kit": "^0.9.0",
     "@opentelemetry/api": "^1.9.0",
@@ -82,6 +86,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.1",
     "embla-carousel-react": "^8.6.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
