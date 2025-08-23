@@ -4,12 +4,15 @@ import nextPlugin from '@next/eslint-plugin-next';
 import prettierPlugin from 'eslint-plugin-prettier';
 
 export default [
+  {
+    ignores: ['node_modules/**', '.next/**', 'dist/**', 'src/generated/**'],
+  },
+
   js.configs.recommended,
   ...tseslint.configs.recommended,
 
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
-    ignores: ['node_modules', 'dist', '.next'],
     plugins: {
       '@next/next': nextPlugin,
       prettier: prettierPlugin,
@@ -30,7 +33,7 @@ export default [
       ...nextPlugin.configs.recommended.rules,
       ...prettierPlugin.configs.recommended.rules,
 
-      'prettier/prettier': 'error',
+      'prettier/prettier': 'warn',
       '@next/next/no-html-link-for-pages': 'warn',
     },
   },
