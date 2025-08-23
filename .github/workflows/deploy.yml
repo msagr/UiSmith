@@ -68,7 +68,11 @@ jobs:
 
       # ✅ Disable Next.js built-in lint, only use your config
       - name: Build with Next.js
-        run: NEXT_DISABLE_ESLINT=1 ${{ steps.detect-package-manager.outputs.runner }} next build && ${{ steps.detect-package-manager.outputs.runner }} next export
+        env:
+          NEXT_DISABLE_ESLINT: '1'
+        run: |
+          ${{ steps.detect-package-manager.outputs.runner }} next build
+          ${{ steps.detect-package-manager.outputs.runner }} next export
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
