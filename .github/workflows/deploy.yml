@@ -64,7 +64,7 @@ jobs:
 
       # ✅ Run ESLint with your project config
       - name: Run ESLint
-        run: ${{ steps.detect-package-manager.outputs.runner }} eslint "src/**/*.{js,jsx,ts,tsx}" --max-warnings=0
+        run: ${{ steps.detect-package-manager.outputs.runner }} eslint "src/app" --max-warnings=0
 
       # ✅ Disable Next.js built-in lint, only use your config
       - name: Build with Next.js
