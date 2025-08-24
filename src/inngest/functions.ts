@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { PROMPT } from './../prompt';
 import { Sandbox } from '@e2b/code-interpreter';
 import { inngest } from './client';
@@ -21,7 +23,8 @@ export const helloWorld = inngest.createFunction(
       description: 'An expert coding agent',
       system: PROMPT,
       model: openai({
-        model: 'gpt-4o',
+        model: 'gpt-4o-mini',
+        defaultParameters: { temperature: 0.1 },
       }),
       tools: [
         createTool({
@@ -37,7 +40,7 @@ export const helloWorld = inngest.createFunction(
               try {
                 const sandbox = await getSandbox(sandboxId);
                 const result = await sandbox.commands.run(command, {
-                  onStdout: (data) => {
+                  onStdout: (data: string) => {
                     buffers.stdout += data;
                   },
                   onStderr: (data: string) => {
@@ -133,6 +136,7 @@ export const helloWorld = inngest.createFunction(
       maxIter: 15,
       router: async ({ network }) => {
         const summary = network.state.data.summary;
+        console.log('summary: ', summary);
         if (summary) {
           return;
         }
@@ -141,6 +145,7 @@ export const helloWorld = inngest.createFunction(
       },
     });
 
+    // console.log('Event value:', event.data.value);
     const result = await network.run(event.data.value);
 
     const sandboxUrl = await step.run('get-sandbox-url', async () => {
