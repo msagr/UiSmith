@@ -1,0 +1,21 @@
+name: Docker Build Check
+
+on:
+  workflow_run:
+    workflows: ['Next.js Build']
+    types:
+      - completed
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout source code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Build Docker image (just to validate build works)
+      - name: Build Docker image
+        run: |
+          docker build -t nextjs-docker .
