@@ -1,8 +1,10 @@
+import { PROMPT } from './../prompt';
 import { Sandbox } from '@e2b/code-interpreter';
 import { inngest } from './client';
-import { openai, createAgent } from '@inngest/agent-kit';
+import { openai, createAgent, createNetwork } from '@inngest/agent-kit';
 import { getSandbox } from './utils';
 import { createTool } from '@inngest/agent-kit';
+import { lastAssistantTextMessageContent } from './utils';
 import { z } from 'zod';
 
 export const helloWorld = inngest.createFunction(
@@ -16,9 +18,12 @@ export const helloWorld = inngest.createFunction(
 
     const codeAgent = createAgent({
       name: 'code-agent',
-      system:
-        'You are an expert next.js developer.  You write readable, maintainable code. You write simple Next.js & React snippets.',
-      model: openai({ model: 'gpt-4o' }),
+      description: 'An expert coding agent',
+      system: PROMPT,
+      model: openai({
+        model: 'gpt-4.1',
+        defaultParameters: { temperature: 0.1 },
+      }),
       tools: [
         createTool({
           name: 'terminal',
@@ -107,11 +112,37 @@ export const helloWorld = inngest.createFunction(
           },
         }),
       ],
+      lifecycle: {
+        onResponse: async ({ result, network }) => {
+          const lastAssistantMessageText =
+            lastAssistantTextMessageContent(result);
+
+          if (lastAssistantMessageText && network) {
+            if (lastAssistantMessageText.includes('<task_summary>')) {
+              network.state.data.summary = lastAssistantMessageText;
+            }
+          }
+
+          return result;
+        },
+      },
     });
 
-    const { output } = await codeAgent.run(
-      `Summarize following text: ${event.data.value}`
-    );
+    const network = createNetwork({
+      name: 'code-agent-network',
+      agents: [codeAgent],
+      maxIter: 15,
+      router: async ({ network }) => {
+        const summary = network.state.data.summary;
+        if (summary) {
+          return;
+        }
+
+        return codeAgent;
+      },
+    });
+
+    const result = await network.run(event.data.value);
 
     const sandboxUrl = await step.run('get-sandbox-url', async () => {
       const sandbox = await getSandbox(sandboxId);
@@ -119,9 +150,12 @@ export const helloWorld = inngest.createFunction(
       return `https://${host}`;
     });
 
-    console.log(output);
-
     // await step.sleep('wait-a-moment', '10s');
-    return { output, sandboxUrl };
+    return {
+      url: sandboxUrl,
+      title: 'Fragment',
+      files: result.state.data.files,
+      summary: result.state.data.summary,
+    };
   }
 );
