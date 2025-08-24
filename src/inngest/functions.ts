@@ -21,8 +21,7 @@ export const helloWorld = inngest.createFunction(
       description: 'An expert coding agent',
       system: PROMPT,
       model: openai({
-        model: 'gpt-4.1',
-        defaultParameters: { temperature: 0.1 },
+        model: 'gpt-4o',
       }),
       tools: [
         createTool({
@@ -30,7 +29,7 @@ export const helloWorld = inngest.createFunction(
           description: 'Use the terminal to run commands',
           parameters: z.object({
             command: z.string(),
-          }) as any,
+          }),
           handler: async ({ command }, { step }) => {
             return await step?.run('terminal', async () => {
               const buffers = { stdout: '', stderr: '' };
@@ -65,7 +64,7 @@ export const helloWorld = inngest.createFunction(
                 content: z.string(),
               })
             ),
-          }) as any,
+          }),
           handler: async ({ files }, { step, network }) => {
             const newFiles = await step?.run(
               'createOrUpdateFiles',
@@ -75,7 +74,7 @@ export const helloWorld = inngest.createFunction(
                   const sandbox = await getSandbox(sandboxId);
                   for (const file of files) {
                     await sandbox.files.write(file.path, file.content);
-                    updatedFiles[files.path] = files.content;
+                    updatedFiles[file.path] = file.content;
                   }
                   return updatedFiles;
                 } catch (e) {
@@ -94,7 +93,7 @@ export const helloWorld = inngest.createFunction(
           description: 'Read files from the sandbox',
           parameters: z.object({
             files: z.array(z.string()),
-          }) as any,
+          }),
           handler: async ({ files }, { step }) => {
             return await step?.run('readFiles', async () => {
               try {
