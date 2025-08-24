@@ -39,7 +39,9 @@
     "reset-db": "./scripts/resetdb.mjs",
     "inngest-cli": "./scripts/inngest-dev.mjs",
     "e2b-build": "./scripts/e2b-next-env.mjs",
-    "e2b-publish": "./scripts/e2b-publish.mjs"
+    "e2b-publish": "./scripts/e2b-publish.mjs",
+    "docker-run": "./scripts/docker-run.mjs",
+    "docker-build": "./scripts/docker-build.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -48,7 +50,7 @@
     "@e2b/cli": "^2.0.1",
     "@e2b/code-interpreter": "^2.0.0",
     "@hookform/resolvers": "^5.2.1",
-    "@inngest/agent-kit": "^0.9.0",
+    "@inngest/agent-kit": "^0.8.3",
     "@opentelemetry/api": "^1.9.0",
     "@prisma/client": "^6.14.0",
     "@radix-ui/react-accordion": "^1.2.12",
@@ -107,7 +109,7 @@
     "tailwind-merge": "^3.3.1",
     "typescript-eslint": "^8.40.0",
     "vaul": "^1.1.2",
-    "zod": "^4.0.17"
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
