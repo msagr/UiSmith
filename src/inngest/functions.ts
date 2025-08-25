@@ -8,6 +8,7 @@ import { getSandbox } from './utils';
 import { createTool } from '@inngest/agent-kit';
 import { lastAssistantTextMessageContent } from './utils';
 import { z } from 'zod';
+import prisma from '@/lib/db';
 
 export const helloWorld = inngest.createFunction(
   { id: 'hello-world' },
@@ -152,6 +153,23 @@ export const helloWorld = inngest.createFunction(
       const sandbox = await getSandbox(sandboxId);
       const host = sandbox.getHost(3000);
       return `https://${host}`;
+    });
+
+    await step.run('save-result', async () => {
+      return await prisma.message.create({
+        data: {
+          content: result.state.data.summary,
+          role: 'ASSISTANT',
+          type: 'RESULT',
+          fragment: {
+            create: {
+              sandboxUrl: sandboxUrl,
+              title: 'Fragment',
+              file: result.state.data.files,
+            },
+          },
+        },
+      });
     });
 
     // await step.sleep('wait-a-moment', '10s');
