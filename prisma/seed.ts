@@ -1,16 +1,6 @@
 import { PrismaClient, Prisma } from '../src/generated/prisma';
 
-// lazy init prisma
-let prisma: PrismaClient | undefined;
-
-export function getPrisma() {
-  if (!prisma) {
-    prisma = new PrismaClient();
-  }
-  return prisma;
-}
-
-prisma = getPrisma();
+const prisma = new PrismaClient();
 
 const userData: Prisma.UserCreateInput[] = [
   {
@@ -51,4 +41,6 @@ export async function main() {
   }
 }
 
-main();
+if (process.env.NODE_ENV === 'test') {
+  main();
+}
