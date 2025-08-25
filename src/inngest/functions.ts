@@ -10,9 +10,9 @@ import { lastAssistantTextMessageContent } from './utils';
 import { z } from 'zod';
 import prisma from '@/lib/db';
 
-export const helloWorld = inngest.createFunction(
-  { id: 'hello-world' },
-  { event: 'test/hello.world' },
+export const codeAgent = inngest.createFunction(
+  { id: 'code-agent' },
+  { event: 'code-agent/run' },
   async ({ event, step }) => {
     const sandboxId = await step.run('get-sandbox-id', async () => {
       const sandbox = await Sandbox.create('uismith-nextjs');
