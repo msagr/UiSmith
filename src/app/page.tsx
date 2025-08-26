@@ -7,7 +7,7 @@ import { useTRPC } from '@/trpc/client';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const router = useRouter();
