@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
-    "lint": "npx eslint src/app --ext .js,.jsx,.ts,.tsx --fix"
+    "lint": "eslint src/app --fix"
   },
   "husky": {
     "hooks": {
@@ -37,13 +37,20 @@
     "seed": "./scripts/seed.mjs",
     "tables": "./scripts/studio.mjs",
     "reset-db": "./scripts/resetdb.mjs",
-    "inngest-cli": "./scripts/inngest-dev.mjs"
+    "inngest-cli": "./scripts/inngest-dev.mjs",
+    "e2b-build": "./scripts/e2b-next-env.mjs",
+    "e2b-publish": "./scripts/e2b-publish.mjs",
+    "docker-run": "./scripts/docker-run.mjs",
+    "docker-build": "./scripts/docker-build.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@e2b/cli": "^2.0.1",
+    "@e2b/code-interpreter": "^2.0.0",
     "@hookform/resolvers": "^5.2.1",
+    "@inngest/agent-kit": "^0.8.3",
     "@opentelemetry/api": "^1.9.0",
     "@prisma/client": "^6.14.0",
     "@radix-ui/react-accordion": "^1.2.12",
@@ -81,6 +88,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.1",
     "embla-carousel-react": "^8.6.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -89,6 +97,7 @@
     "lucide-react": "^0.540.0",
     "next": "15.3.4",
     "next-themes": "^0.4.6",
+    "random-word-slugs": "^0.1.7",
     "react": "^19.0.0",
     "react-day-picker": "^9.9.0",
     "react-dom": "^19.0.0",
@@ -99,11 +108,11 @@
     "sonner": "^2.0.7",
     "superjson": "^2.2.2",
     "tailwind-merge": "^3.3.1",
+    "typescript-eslint": "^8.40.0",
     "vaul": "^1.1.2",
-    "zod": "^4.0.17"
+    "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
