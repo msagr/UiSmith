@@ -1,0 +1,8 @@
+[vars]
+# The URL of your tunnel. This enables the "cloud" worker to access the local Dev Server
+INNGEST_DEV = "https://YOUR_TUNNEL_URL.ngrok.app"
+# This may be needed:
+# The URL of your local server. This enables the Dev Server to access the app at this local URL
+# You may have to change this URL to match your local server if running on a different port.
+# Without this, the "cloud" worker may attempt to redirect Inngest to the wrong URL.
+INNGEST_SERVE_HOST = "http://localhost:8787"
