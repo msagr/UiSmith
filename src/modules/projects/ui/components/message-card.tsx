@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { Fragment, MessageRole, MessageType } from '@/generated/prisma';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import Image from "next/image";
 
 interface UserMessageProps {
     content: string;
@@ -51,7 +52,7 @@ const AssistantMessage = ({
 
         )}>
             <div className="flex items-center gap-2 pl-2 mb-2">
-                {/* TODO: add logo */}
+                <Image src="/logo.svg" alt="UiSmith Logo" width={18} height={18} className="shrink-0" />
                 <span className="text-sm font-medium">UiSmith</span>
                 <span className="text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
                     {format(createdAt, "HH:mm 'on' MMM dd, yyyy")}
