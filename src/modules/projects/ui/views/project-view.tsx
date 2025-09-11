@@ -1,5 +1,6 @@
 "use client";
 
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { useTRPC } from '@/trpc/client';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
@@ -18,8 +19,22 @@ export const ProjectView = ({ projectId }: Props) => {
 
     return (
         <div>
-            {JSON.stringify(project)}
-            {JSON.stringify(messages, null, 2)}
+            <ResizablePanelGroup direction="horizontal">
+                <ResizablePanel
+                    defaultSize = {35}
+                    minSize = {20}
+                    className = "flex flex-col min-h-0"
+                >
+                    {JSON.stringify(project)}
+                </ResizablePanel>
+                <ResizableHandle withHandle />
+                <ResizablePanel
+                    defaultSize = {65}
+                    minSize = {50}
+                >
+                    {JSON.stringify(messages, null, 2)}
+                </ResizablePanel>
+            </ResizablePanelGroup>
         </div>
     )
 };

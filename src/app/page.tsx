@@ -1,4 +1,3 @@
-/* eslint-disable */
 'use client';
 
 import { toast } from 'sonner';
