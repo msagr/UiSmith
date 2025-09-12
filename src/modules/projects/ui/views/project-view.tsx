@@ -7,12 +7,15 @@ import { useTRPC } from '@/trpc/client';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { MessagesContainer } from '../components/message-container';
 import { Suspense } from 'react';
+import { useState } from 'react';
+import { Fragment } from '@/generated/prisma';
 
 interface Props {
     projectId: string;
 };
 
 export const ProjectView = ({ projectId }: Props) => {
+    const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
     const trpc = useTRPC();
     const { data: project} = useSuspenseQuery(trpc.projects.getOne.queryOptions({
         id: projectId,
@@ -27,7 +30,7 @@ export const ProjectView = ({ projectId }: Props) => {
                     className = "flex flex-col min-h-0"
                 >
                     <Suspense fallback={<p>Loading messages .... </p>}>
-                        <MessagesContainer projectId = {projectId} />
+                        <MessagesContainer projectId = {projectId} activeFragment={activeFragment} setActiveFragment={setActiveFragment}/>
                     </Suspense>
                 </ResizablePanel>
                 <ResizableHandle withHandle />
