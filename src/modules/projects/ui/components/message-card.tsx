@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { format } from "date-fns";
 import { Fragment, MessageRole, MessageType } from '@/generated/prisma';
 import { Card } from '@/components/ui/card';

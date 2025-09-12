@@ -1,7 +1,4 @@
 {
-  "sdk-url": [
-    "http://localhost:3000/api/inngest",
-    "http://localhost:3030/api/inngest"
-  ],
+  "sdk-url": ["http://localhost:3000/api/inngest"],
   "no-discovery": true
 }
