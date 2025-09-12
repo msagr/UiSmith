@@ -6,6 +6,7 @@ import { MessageCard } from "./message-card";
 import { MessageForm } from "./message-form";
 import { useRef, useEffect } from "react";
 import { Fragment } from "@/generated/prisma";
+import { MessageLoading } from "./message-loading";
 
 interface Props {
     projectId: string;
@@ -35,6 +36,9 @@ export const MessagesContainer = ({ projectId, activeFragment, setActiveFragment
         bottomRef.current?.scrollIntoView();
     }, [messages.length]);
 
+    const lastMessage = messages[messages.length - 1];
+    const isLastMessageUser = lastMessage?.role === "USER";
+
     return (
         <div className="flex flex-col h-screen">
             <div className="flex-1 min-h-0 overflow-y-auto">
@@ -51,6 +55,7 @@ export const MessagesContainer = ({ projectId, activeFragment, setActiveFragment
                             type = {message.type}
                         />
                     ))}
+                    {isLastMessageUser && <MessageLoading />}
                     <div ref={bottomRef} />
                 </div>
             </div>
