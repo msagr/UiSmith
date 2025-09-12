@@ -24,15 +24,16 @@ export const MessagesContainer = ({ projectId, activeFragment, setActiveFragment
         refetchInterval: 5000,
     }));
 
-    useEffect(() => {
-        const lastAssistantMessageWithFragment = messages.findLast(
-            (message) => message.role === "ASSISTANT" && !!message.fragment,
-        );
+    // TODO: Causing Problem
+    // useEffect(() => {
+    //     const lastAssistantMessageWithFragment = messages.findLast(
+    //         (message) => message.role === "ASSISTANT" && !!message.fragment,
+    //     );
 
-        if (lastAssistantMessageWithFragment) {
-            setActiveFragment(lastAssistantMessageWithFragment.fragment);
-        }
-    }, [messages]);
+    //     if (lastAssistantMessageWithFragment) {
+    //         setActiveFragment(lastAssistantMessageWithFragment.fragment);
+    //     }
+    // }, [messages, setActiveFragment]);
 
     useEffect(() => {
         bottomRef.current?.scrollIntoView();
