@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 // import * as trpcNext from '@trpc/server/adapters/next';
 import { appRouter } from '@/trpc/routers/_app';
 // export API handler
