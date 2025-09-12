@@ -1,10 +1,9 @@
-/* eslint-disable */
 'use client';
 
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { useTRPC } from '@/trpc/client';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
@@ -15,18 +14,20 @@ export default function Page() {
 
   const trpc = useTRPC();
   // const { data: messages } = useQuery(trpc.messages.getMany.queryOptions());
-  const createProject = useMutation(trpc.projects.create.mutationOptions({
-    onError: (error) => {
-      toast.error(error.message)
-    },
-    onSuccess: (data) => {
-      router.push(`/projects/${data.id}`);
-    }
-  }))
+  const createProject = useMutation(
+    trpc.projects.create.mutationOptions({
+      onError: (error) => {
+        toast.error(error.message);
+      },
+      onSuccess: (data) => {
+        router.push(`/projects/${data.id}`);
+      },
+    })
+  );
 
   return (
-    <div className='h-screen w-screen flex items-center justify-center'>
-      <div className='max-w-7xl mx-auto flex items-center flex-col gap-y-4 justify-center'>
+    <div className="flex h-screen w-screen items-center justify-center">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-y-4">
         <Input value={value} onChange={(e) => setValue(e.target.value)} />
         <Button
           disabled={createProject.isPending}
