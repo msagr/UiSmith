@@ -33,11 +33,11 @@ interface FileBreadcrumbProps {
 
 const FileBreadcrumb = ({ filePath }: FileBreadcrumbProps) => {
     const pathSegments = filePath.split('/');
-    const maxSegments = 4;
+    const maxSegments = 3;
 
     const renderBreadcrumbItems = () => {
         if (pathSegments.length <= maxSegments) {
-            // Show all segments if 4 or less
+            // Show all segments if 3 or less
             return pathSegments.map((segment, index) => {
                 const isLast = index === pathSegments.length - 1;
                 return (
@@ -97,6 +97,7 @@ interface FileExplorerProps {
 };
 
 export const FileExplorer = ({ files }: FileExplorerProps) => {
+    const [copied, setCopied] = useState(false);
     const [selectedFile, setSelecetdFile] = useState<string | null>(() => {
         const fileKeys = Object.keys(files);
         return fileKeys.length > 0 ? fileKeys[0] : null;
@@ -113,6 +114,16 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
             setSelecetdFile(filePath);
         }
     }, [files]);
+
+    const handleCopy = useCallback(() => {
+        if(selectedFile) {
+            navigator.clipboard.writeText(files[selectedFile]);
+            setCopied(true);
+            setTimeout(() => {
+                setCopied(false);
+            }, 2000);
+        }
+    }, [selectedFile, files]);
 
     return (
         <ResizablePanelGroup direction="horizontal">
@@ -134,10 +145,10 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
                                     variant="outline"
                                     size="icon"
                                     className="ml-auto"
-                                    onClick={() => {}}
-                                    disabled={false}
+                                    onClick={handleCopy}
+                                    disabled={copied}
                                 >
-                                    <CopyIcon />
+                                    {copied ? <CopyCheckIcon /> : <CopyIcon />}
                                 </Button>
                             </Hint>
                         </div>
