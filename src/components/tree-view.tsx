@@ -33,7 +33,8 @@ export const TreeView = ({
     onSelect,
 }: TreeViewProps) => {
     return (
-        <SidebarProvider>
+        <div className="flex flex-col h-[calc(100vh-49px)]">
+            <SidebarProvider>
             <Sidebar collapsible="none" className="w-full">
                 <SidebarContent>
                     <SidebarGroup>
@@ -52,9 +53,10 @@ export const TreeView = ({
                         </SidebarGroupContent>
                     </SidebarGroup>
                 </SidebarContent>
-                <SidebarRail />
+                {/* <SidebarRail /> */}
             </Sidebar>
         </SidebarProvider>
+        </div>
     )
 };
 
