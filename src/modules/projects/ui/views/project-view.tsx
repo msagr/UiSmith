@@ -17,6 +17,7 @@ import { CodeIcon, EyeIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { CrownIcon } from 'lucide-react';
+import { FileExplorer } from '@/components/file-explorer';
 
 interface Props {
     projectId: string;
@@ -83,6 +84,11 @@ export const ProjectView = ({ projectId }: Props) => {
                                 code="const a = 'Hello world';"
 
                             />
+                            {!!activeFragment?.file && (
+                                <FileExplorer 
+                                    files={activeFragment.file as { [path: string]: string }}
+                                />
+                            )}
                         </TabsContent>
                     </Tabs>
                 </ResizablePanel>
