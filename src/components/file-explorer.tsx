@@ -8,6 +8,7 @@ import {
     ResizablePanel,
     ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { TreeView } from "./tree-view";
 
 import {
     Breadcrumb,
@@ -17,6 +18,7 @@ import {
     BreadcrumbSeparator,
     BreadcrumbEllipsis,
 } from "@/components/ui/breadcrumb";
+import { convertFileToTreeItems } from "@/lib/utils";
 
 type FileCollection = { [path: string]: string};
 
@@ -34,10 +36,27 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
         const fileKeys = Object.keys(files);
         return fileKeys.length > 0 ? fileKeys[0] : null;
     });
+
+    const treeData = useMemo(() => {
+        return convertFileToTreeItems(files);
+    }, [files]);
+
+    const handleFileSelect = useCallback((
+        filePath: string
+    ) => {
+        if(files[filePath]) {
+            setSelecetdFile(filePath);
+        }
+    }, [files]);
+
     return (
         <ResizablePanelGroup direction="horizontal">
             <ResizablePanel defaultSize={30} minSize={30} className="bg-sidebar">
-                <p>TODO: Tree View</p>
+                <TreeView 
+                    data={treeData}
+                    value={selectedFile}
+                    onSelect={handleFileSelect}
+                />
             </ResizablePanel>
             <ResizableHandle className="hover:bg-primary transition-colors" />
             <ResizablePanel defaultSize={70} minSize={50}>
