@@ -2,6 +2,7 @@
 
 "use client";
 
+import { CodeView } from '@/components/code-view';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { useTRPC } from '@/trpc/client';
 import { useSuspenseQuery } from '@tanstack/react-query';
@@ -77,7 +78,11 @@ export const ProjectView = ({ projectId }: Props) => {
                             {!!activeFragment && <FragmentWeb data={activeFragment}/>}
                         </TabsContent>
                         <TabsContent value="code">
-                            <p>TODO: Code</p>
+                            <CodeView
+                                lang="typescript"
+                                code="const a = 'Hello world';"
+
+                            />
                         </TabsContent>
                     </Tabs>
                 </ResizablePanel>
