@@ -43,7 +43,7 @@ export const MessagesContainer = ({ projectId, activeFragment, setActiveFragment
     const isLastMessageUser = lastMessage?.role === "USER";
 
     return (
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-[calc(100vh-49px)]">
             <div className="flex-1 min-h-0 overflow-y-auto">
                 <div className="pt-2 pr-1">
                     {messages.map((message) => (
@@ -63,7 +63,7 @@ export const MessagesContainer = ({ projectId, activeFragment, setActiveFragment
                 </div>
             </div>
             {/* {JSON.stringify(messages)} */}
-            <div className="relative p-3 pt-1 mt-auto">
+            <div className="relative p-3 pt-1">
                 <div className="absolute -top-6 left-0 right-0 h-6 bg-gradient-to-b from-transparent to-background pointer-events-none" />
                 <MessageForm projectId = {projectId} />
             </div>
