@@ -15,6 +15,7 @@ import { Form, FormField } from "@/components/ui/form";
 import { ArrowUpIcon, Loader2Icon } from "lucide-react";
 import { trpc } from "@/trpc/server";
 import { useRouter } from "next/navigation";
+import { PROJECT_TEMPLATES } from "../../constants";
 
 
 const formSchema = z.object({
@@ -55,13 +56,22 @@ export const ProjectForm = () => {
         });
     };
 
+    const onSelect = (value: string) => {
+        form.setValue("value", value, {
+            shouldDirty: true,
+            shouldValidate: true,
+            shouldTouch: true,
+        });
+    }
+
     const isPending = createProject.isPending;
     const isButtonDisabled = isPending || !form.formState.isValid;
     const [isFocused, setIsFocused] = useState(false);
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className={cn("relative border p-4 pt-1 rounded-xl bg-sidebar dark:bg-sidebar transition-all", isFocused && "shadow-xs", "rounded-t-none")}>
+            <section className="space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className={cn("relative border p-4 pt-1 rounded-xl bg-sidebar dark:bg-sidebar transition-all", isFocused && "shadow-xs", "rounded-t-none")}>
                 <FormField control={form.control} name="value" render={({ field }) => (
                     <TextareaAutosize 
                         {...field}
@@ -104,6 +114,20 @@ export const ProjectForm = () => {
                 </Button>
                 </div>
             </form>
+            <div className="flex-wrap justify-center gap-2 hidden md:flex max-w-3xl">
+                    {PROJECT_TEMPLATES.map((template) => (
+                        <Button 
+                            key={template.title}
+                            variant="outline"
+                            size="sm"
+                            className="bg-white dark:bg-sidebar"
+                            onClick={() => onSelect(template.prompt)}
+                        >
+                            {template.emoji} {template.title}
+                        </Button>
+                    ))}
+            </div>
+            </section>
         </Form>
     );
 };
