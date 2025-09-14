@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { createTRPCRouter, baseProcedure } from '@/trpc/init';
+import { createTRPCRouter, protectedProcedure } from '@/trpc/init';
 import prisma from '@/lib/db';
 import { z } from 'zod';
 import { inngest } from '@/inngest/client';
@@ -8,7 +8,7 @@ import { generateSlug } from 'random-word-slugs';
 import { TRPCError } from '@trpc/server';
 
 export const projectsRouter = createTRPCRouter({
-  getOne: baseProcedure
+  getOne: protectedProcedure
     .input(
       z.object({
         id: z.string().min(1, { message: 'Id is required' }),
@@ -30,7 +30,7 @@ export const projectsRouter = createTRPCRouter({
 
       return existingProject;
     }),
-  getMany: baseProcedure.query(async () => {
+  getMany: protectedProcedure.query(async () => {
     const projects = await prisma.project.findMany({
       orderBy: {
         updatedAt: 'asc',
@@ -38,7 +38,7 @@ export const projectsRouter = createTRPCRouter({
     });
     return projects;
   }),
-  create: baseProcedure
+  create: protectedProcedure
     .input(
       z.object({
         value: z

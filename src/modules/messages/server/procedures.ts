@@ -1,12 +1,12 @@
 /* eslint-disable */
 
-import { createTRPCRouter, baseProcedure } from '@/trpc/init';
+import { createTRPCRouter, protectedProcedure } from '@/trpc/init';
 import prisma from '@/lib/db';
 import { z } from 'zod';
 import { inngest } from '@/inngest/client';
 
 export const messageRouter = createTRPCRouter({
-  getMany: baseProcedure
+  getMany: protectedProcedure
     .input(
       z.object({
         projectId: z.string().min(1, { message: 'Project id is required' }),
@@ -26,7 +26,7 @@ export const messageRouter = createTRPCRouter({
       });
       return messages;
     }),
-  create: baseProcedure
+  create: protectedProcedure
     .input(
       z.object({
         value: z
