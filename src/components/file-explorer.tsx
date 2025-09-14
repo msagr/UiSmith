@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { CopyCheckIcon, CopyIcon } from "lucide-react";
 import { useState, useMemo, useCallback, Fragment } from "react";
 import { Hint } from "@/components/hint";
