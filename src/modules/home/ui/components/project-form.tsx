@@ -129,7 +129,9 @@ export const ProjectForm = () => {
                     ))}
             </div>
             </section>
-            <ProjectsList />
+            <div className="mt-16">
+                <ProjectsList />
+            </div>
         </Form>
     );
 };

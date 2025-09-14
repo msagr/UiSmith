@@ -8,7 +8,7 @@ import { ProjectForm } from "@/modules/home/ui/components/project-form";
 const Page = () => {
   return (
     <div className="flex flex-col max-w-5xl mx-auto w-full">
-      <section className="space-y-6 py-[16vh] 2xl:py-48">
+      <section className="space-y-3 pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="flex flex-col items-center">
           <Image 
             src="/logo.svg"
