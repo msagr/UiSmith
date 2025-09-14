@@ -16,6 +16,7 @@ import { ArrowUpIcon, Loader2Icon } from "lucide-react";
 import { trpc } from "@/trpc/server";
 import { useRouter } from "next/navigation";
 import { PROJECT_TEMPLATES } from "../../constants";
+import { ProjectsList } from "./projects-list";
 
 
 const formSchema = z.object({
@@ -128,6 +129,7 @@ export const ProjectForm = () => {
                     ))}
             </div>
             </section>
+            <ProjectsList />
         </Form>
     );
 };

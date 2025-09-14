@@ -21,7 +21,7 @@ const Page = () => {
           Lets craft award-winning websites
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground text-center">
-          Bring your idea to life, just by chatting with UiSmith. 
+          Bring your ideas to life, just by chatting with UiSmith. 
         </p>
         <div className="max-w-3xl mx-auto w-full">
           <ProjectForm />
