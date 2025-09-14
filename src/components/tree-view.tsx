@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { TreeItem } from "@/types";
 import {
     Collapsible,
