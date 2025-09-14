@@ -1,5 +1,6 @@
 // import * as trpcNext from '@trpc/server/adapters/next';
 import { appRouter } from '@/trpc/routers/_app';
+import { createContext } from '@/app/server/context';
 // export API handler
 // @link https://trpc.io/docs/v11/server/adapters
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
@@ -11,7 +12,7 @@ export async function GET(request: Request) {
     endpoint: '/api/trpc',
     req: request,
     router: appRouter,
-    createContext: () => ({}),
+    createContext,
   });
 }
 
@@ -20,6 +21,6 @@ export async function POST(request: Request) {
     endpoint: '/api/trpc',
     req: request,
     router: appRouter,
-    createContext: () => ({}),
+    createContext,
   });
 }
