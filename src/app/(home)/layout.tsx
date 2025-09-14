@@ -1,5 +1,7 @@
 /* eslint-disable */
 
+import { Navbar } from "@/modules/projects/ui/components/navbar";
+
 interface Props { 
     children: React.ReactNode;
 };
@@ -7,6 +9,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
     return (
         <main className="relative flex flex-col min-h-screen max-h-screen">
+            <Navbar />
             <div className="fixed inset-0 -z-10 h-full w-full 
                 bg-[radial-gradient(#dadde2_1px,transparent_1px)] 
                 dark:bg-[radial-gradient(#393e4a_1px,transparent_1px)] 
