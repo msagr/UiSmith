@@ -3,6 +3,7 @@ import { ExternalLinkIcon, RefreshCcwIcon } from "lucide-react";
 import { Fragment } from "@/generated/prisma";
 import { Button } from "@/components/ui/button";
 import { Hint } from "@/components/hint";
+
 interface Props {
     data: Fragment;
 };
