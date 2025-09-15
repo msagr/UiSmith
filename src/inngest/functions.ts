@@ -240,14 +240,14 @@ export const codeAgentFunction = inngest.createFunction(
     };
 
     const generateResponse = () => {
-      if (fragmentTitleOutput[0].type !== 'text') {
+      if (responseOutput[0].type !== 'text') {
         return 'Here you go';
       }
 
-      if (Array.isArray(fragmentTitleOutput[0].content)) {
-        return fragmentTitleOutput[0].content.map((txt) => txt).join('');
+      if (Array.isArray(responseOutput[0].content)) {
+        return responseOutput[0].content.map((txt) => txt).join('');
       } else {
-        return fragmentTitleOutput[0].content;
+        return responseOutput[0].content;
       }
     };
 
