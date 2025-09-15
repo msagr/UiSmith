@@ -47,6 +47,7 @@ export const ProjectForm = () => {
             queryClient.invalidateQueries(
                 trpc.usage.status.queryOptions(),
             );
+            router.push(`/projects/${data.id}`);
         },
         onError: (error) => {
             toast.error(error.message);
@@ -91,7 +92,7 @@ export const ProjectForm = () => {
                         minRows={2}
                         maxRows={8}
                         className="pt-4 resize-none border-none w-full outline-none bg-transparent"
-                        placeholder="What would you like to build ?"
+                        placeholder="What would you like to build 2 ?"
                         onKeyDown={(e) => {
                             if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
                                 e.preventDefault();
