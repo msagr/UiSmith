@@ -14,6 +14,8 @@ import { createTool } from '@inngest/agent-kit';
 import { lastAssistantTextMessageContent } from './utils';
 import { z } from 'zod';
 import prisma from '@/lib/db';
+import { Message } from '@inngest/agent-kit';
+import { createState } from '@inngest/agent-kit';
 
 interface AgentState {
   summary: string;
@@ -28,6 +30,42 @@ export const codeAgentFunction = inngest.createFunction(
       const sandbox = await Sandbox.create('uismith-nextjs');
       return sandbox.sandboxId;
     });
+
+    const previousMessages = await step.run(
+      'get-previous-messages',
+      async () => {
+        const formattedMessages: Message[] = [];
+
+        const messages = await prisma.message.findMany({
+          where: {
+            projectId: event.data.projectId,
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+        });
+
+        for (const message of messages) {
+          formattedMessages.push({
+            type: 'text',
+            role: message.role === 'ASSISTANT' ? 'assistant' : 'user',
+            content: message.content,
+          });
+        }
+
+        return formattedMessages;
+      }
+    );
+
+    const state = createState<AgentState>(
+      {
+        summary: '',
+        files: {},
+      },
+      {
+        messages: previousMessages,
+      }
+    );
 
     const codeAgent = createAgent<AgentState>({
       name: 'code-agent',
@@ -148,6 +186,7 @@ export const codeAgentFunction = inngest.createFunction(
       name: 'code-agent-network',
       agents: [codeAgent],
       maxIter: 15,
+      defaultState: state,
       router: async ({ network }) => {
         const summary = network.state.data.summary;
         console.log('summary: ', summary);
@@ -160,7 +199,7 @@ export const codeAgentFunction = inngest.createFunction(
     });
 
     // console.log('Event value:', event.data.value);
-    const result = await network.run(event.data.value);
+    const result = await network.run(event.data.value, { state });
 
     const isError =
       !result.state.data.summary ||
