@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { PROMPT } from './../prompt';
+import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from './../prompt';
 import { Sandbox } from '@e2b/code-interpreter';
 import { inngest } from './client';
 import {
@@ -41,7 +41,7 @@ export const codeAgentFunction = inngest.createFunction(
             projectId: event.data.projectId,
           },
           orderBy: {
-            createdAt: 'desc',
+            createdAt: 'desc', // Change to ascending if AI doesn't understand whats the latest message.
           },
         });
 
@@ -201,6 +201,56 @@ export const codeAgentFunction = inngest.createFunction(
     // console.log('Event value:', event.data.value);
     const result = await network.run(event.data.value, { state });
 
+    const fragmentTitleGenerator = createAgent({
+      name: 'fragment-title-generator',
+      description: 'A fragment title generator',
+      system: FRAGMENT_TITLE_PROMPT,
+      model: openai({
+        model: 'gpt-4o',
+      }),
+    });
+
+    const responseGenerator = createAgent({
+      name: 'response-generator',
+      description: 'A response generator',
+      system: RESPONSE_PROMPT,
+      model: openai({
+        model: 'gpt-4o',
+      }),
+    });
+
+    const { output: fragmentTitleOutput } = await fragmentTitleGenerator.run(
+      result.state.data.summary
+    );
+
+    const { output: responseOutput } = await responseGenerator.run(
+      result.state.data.summary
+    );
+
+    const generateFragmentTitle = () => {
+      if (fragmentTitleOutput[0].type !== 'text') {
+        return 'Fragment';
+      }
+
+      if (Array.isArray(fragmentTitleOutput[0].content)) {
+        return fragmentTitleOutput[0].content.map((txt) => txt).join('');
+      } else {
+        return fragmentTitleOutput[0].content;
+      }
+    };
+
+    const generateResponse = () => {
+      if (fragmentTitleOutput[0].type !== 'text') {
+        return 'Here you go';
+      }
+
+      if (Array.isArray(fragmentTitleOutput[0].content)) {
+        return fragmentTitleOutput[0].content.map((txt) => txt).join('');
+      } else {
+        return fragmentTitleOutput[0].content;
+      }
+    };
+
     const isError =
       !result.state.data.summary ||
       Object.keys(result.state.data.files || {}).length === 0;
@@ -225,13 +275,13 @@ export const codeAgentFunction = inngest.createFunction(
       return await prisma.message.create({
         data: {
           projectId: event.data.projectId,
-          content: result.state.data.summary,
+          content: generateResponse(),
           role: 'ASSISTANT',
           type: 'RESULT',
           fragment: {
             create: {
               sandboxUrl: sandboxUrl,
-              title: 'Fragment',
+              title: generateFragmentTitle(),
               file: result.state.data.files,
             },
           },
