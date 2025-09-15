@@ -5,6 +5,7 @@ import { baseProcedure, createTRPCRouter } from '../init';
 import { inngest } from '@/inngest/client';
 import { messageRouter } from '@/modules/messages/server/procedures';
 import { projectsRouter } from './../../modules/projects/server/procedure';
+import { usageRouter } from '@/modules/usage/server/procedure';
 
 // export const appRouter = createTRPCRouter({
 //   invoke: baseProcedure
@@ -39,6 +40,7 @@ import { projectsRouter } from './../../modules/projects/server/procedure';
 export const appRouter = createTRPCRouter({
   messages: messageRouter,
   projects: projectsRouter,
+  usage: usageRouter,
 });
 
 export type AppRouter = typeof appRouter;

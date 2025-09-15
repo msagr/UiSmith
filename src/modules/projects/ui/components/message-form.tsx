@@ -14,7 +14,8 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { ArrowUpIcon, Loader2Icon } from "lucide-react";
 import { trpc } from "@/trpc/server";
-
+import { Usage } from "./usage";
+import { useRouter } from "next/navigation";
 
 interface Props {
     projectId: string;
@@ -29,6 +30,9 @@ const formSchema = z.object({
 export const MessageForm = ({ projectId }: Props) => {
     const trpc = useTRPC();
     const queryClient = useQueryClient();
+    const router = useRouter();
+    const { data: usage } = useQuery(trpc.usage.status.queryOptions());
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -44,11 +48,16 @@ export const MessageForm = ({ projectId }: Props) => {
                     projectId
                 }),
             );
-            // TODO: Invalidate usage status
+            queryClient.invalidateQueries(
+                trpc.usage.status.queryOptions()
+            );
         },
         onError: (error) => {
-            // TODO: Redirect to pricing page if specific error
             toast.error(error.message);
+
+            if (error.data?.code === "TOO_MANY_REQUESTS") {
+                router.push("/pricing");
+            }
         }
     }));
 
@@ -62,10 +71,16 @@ export const MessageForm = ({ projectId }: Props) => {
     const isPending = createMessage.isPending;
     const isButtonDisabled = isPending || !form.formState.isValid;
     const [isFocused, setIsFocused] = useState(false);
-    const showUsage = false;
+    const showUsage = !!usage;
 
     return (
         <Form {...form}>
+            {showUsage && (
+                <Usage 
+                    points={usage.remainingPoints}
+                    msBeforeNext={usage.msBeforeNext}
+                />
+            )}
             <form onSubmit={form.handleSubmit(onSubmit)} className={cn("relative border p-4 pt-1 rounded-xl bg-sidebar dark:bg-sidebar transition-all", isFocused && "shadow-xs", showUsage && "rounded-t-none")}>
                 <FormField control={form.control} name="value" render={({ field }) => (
                     <TextareaAutosize 
