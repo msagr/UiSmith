@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { ArrowUpIcon, Loader2Icon } from "lucide-react";
 import { trpc } from "@/trpc/server";
+import { Usage } from "./usage";
 
 
 interface Props {
@@ -62,10 +63,16 @@ export const MessageForm = ({ projectId }: Props) => {
     const isPending = createMessage.isPending;
     const isButtonDisabled = isPending || !form.formState.isValid;
     const [isFocused, setIsFocused] = useState(false);
-    const showUsage = false;
+    const showUsage = true;
 
     return (
         <Form {...form}>
+            {showUsage && (
+                <Usage 
+                    points={0}
+                    msBeforeNext={0}
+                />
+            )}
             <form onSubmit={form.handleSubmit(onSubmit)} className={cn("relative border p-4 pt-1 rounded-xl bg-sidebar dark:bg-sidebar transition-all", isFocused && "shadow-xs", showUsage && "rounded-t-none")}>
                 <FormField control={form.control} name="value" render={({ field }) => (
                     <TextareaAutosize 
