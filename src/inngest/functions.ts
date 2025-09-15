@@ -16,6 +16,7 @@ import { z } from 'zod';
 import prisma from '@/lib/db';
 import { Message } from '@inngest/agent-kit';
 import { createState } from '@inngest/agent-kit';
+import { parseAgentOutput } from './utils';
 
 interface AgentState {
   summary: string;
@@ -227,30 +228,6 @@ export const codeAgentFunction = inngest.createFunction(
       result.state.data.summary
     );
 
-    const generateFragmentTitle = () => {
-      if (fragmentTitleOutput[0].type !== 'text') {
-        return 'Fragment';
-      }
-
-      if (Array.isArray(fragmentTitleOutput[0].content)) {
-        return fragmentTitleOutput[0].content.map((txt) => txt).join('');
-      } else {
-        return fragmentTitleOutput[0].content;
-      }
-    };
-
-    const generateResponse = () => {
-      if (responseOutput[0].type !== 'text') {
-        return 'Here you go';
-      }
-
-      if (Array.isArray(responseOutput[0].content)) {
-        return responseOutput[0].content.map((txt) => txt).join('');
-      } else {
-        return responseOutput[0].content;
-      }
-    };
-
     const isError =
       !result.state.data.summary ||
       Object.keys(result.state.data.files || {}).length === 0;
@@ -275,13 +252,13 @@ export const codeAgentFunction = inngest.createFunction(
       return await prisma.message.create({
         data: {
           projectId: event.data.projectId,
-          content: generateResponse(),
+          content: parseAgentOutput(responseOutput),
           role: 'ASSISTANT',
           type: 'RESULT',
           fragment: {
             create: {
               sandboxUrl: sandboxUrl,
-              title: generateFragmentTitle(),
+              title: parseAgentOutput(fragmentTitleOutput),
               file: result.state.data.files,
             },
           },
