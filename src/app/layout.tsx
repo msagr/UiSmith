@@ -7,6 +7,12 @@ import { TRPCReactProvider } from '@/trpc/client';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from 'next-themes';
 import { ClerkProvider } from "@clerk/nextjs";
+import { Inter } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
