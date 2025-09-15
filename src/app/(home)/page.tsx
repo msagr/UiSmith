@@ -12,7 +12,7 @@ const Page = () => {
         <div className="flex flex-col items-center">
           <Image 
             src="/logo.svg"
-            alt="Vibe"
+            alt="UiSmith"
             width={50}
             height={50}
           />
