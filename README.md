@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✨ UiSmith – AI-Powered Frontend Generator
 
-## Getting Started
+UiSmith is your AI craftsman for stunning frontends.  
+Just describe what you want, and UiSmith forges production-ready React/Next.js components with clean code, modern styling, and best practices baked in.
 
-First, run the development server:
+Whether you’re a **founder prototyping an idea**, a **developer speeding up UI work**, or a **designer wanting instant code**, UiSmith brings your concepts to life in seconds.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 🧩 **Prompt-based generation** – Write a description, get real, working frontend code
+- 🎨 **Modern UI stack** – Generates components with **TailwindCSS**, **shadcn/ui**, and **lucide icons**
+- ⚡ **Next.js 15 + React 19 ready** – Built for the latest frameworks
+- 🔄 **Editable output** – Tweak, copy, and integrate directly into your projects
+- 🌓 **Dark mode & clean design** – Professional-looking UI from the start
+- 🪄 **Inspiration engine** – Try different prompts to explore design variations
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📸 Preview
 
-To learn more about Next.js, take a look at the following resources:
+_(Add screenshots or GIFs here showing prompts → generated UI)_
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack
 
-## Deploy on Vercel
+- **Frontend:** Next.js, React, TailwindCSS, shadcn/ui
+- **AI Generation:** Inngest + LLMs (sandboxed prompt execution)
+- **State Management:** TanStack Query
+- **Hosting:** Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ✍️ Usage
+
+1. Enter a **prompt** like:
+   > "Create a dashboard card with stats, chart, and action button"
+2. UiSmith instantly generates a **production-ready component**
+3. Copy & paste into your project – or refine the design with more prompts
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**
+
+---
+
+🔥 UiSmith makes frontend development **10x faster**.  
+Your ideas deserve to be built instantly — let UiSmith forge them for you.
