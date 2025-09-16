@@ -20,7 +20,7 @@ Whether you’re a **founder prototyping an idea**, a **developer speeding up UI
 
 ## 📸 Preview
 
-<video src="https://drive.google.com/file/d/1rEUow3Ufpx_cT1F4hE3PlteU7xDQMmU1/view?usp=sharing" controls width="600"></video>
+[![Watch the demo](/public/uismith_screenshot.png)](https://drive.google.com/file/d/1rEUow3Ufpx_cT1F4hE3PlteU7xDQMmU1/view?usp=sharing)
 
 ## 🛠️ Tech Stack
 
