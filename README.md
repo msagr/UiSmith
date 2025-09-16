@@ -22,6 +22,8 @@ Whether you’re a **founder prototyping an idea**, a **developer speeding up UI
 
 [![Watch the demo](/public/uismith_screenshot.png)](https://drive.google.com/file/d/1rEUow3Ufpx_cT1F4hE3PlteU7xDQMmU1/view?usp=sharing)
 
+> NOTE - **Click on the picture to watch demo**
+
 ## 🛠️ Tech Stack
 
 - **Frontend:** Next.js, React, TailwindCSS, shadcn/ui
