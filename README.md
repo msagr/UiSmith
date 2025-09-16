@@ -20,9 +20,7 @@ Whether you’re a **founder prototyping an idea**, a **developer speeding up UI
 
 ## 📸 Preview
 
-_(Add screenshots or GIFs here showing prompts → generated UI)_
-
----
+<video src="https://drive.google.com/file/d/1rEUow3Ufpx_cT1F4hE3PlteU7xDQMmU1/view?usp=sharing" controls width="600"></video>
 
 ## 🛠️ Tech Stack
 
