@@ -16,7 +16,8 @@
 	},
 	"dependencies": {
 		"@prismicio/client": "^7.20.1",
-		"@prismicio/svelte": "^2.0.0"
+		"@prismicio/svelte": "^2.0.0",
+		"@repo/ui": "workspace:*"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.9",
