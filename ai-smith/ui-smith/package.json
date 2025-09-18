@@ -6,8 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src/app --fix",
-    "postinstall": "prisma generate"
+    "lint": "eslint src/app --fix"
   },
   "husky": {
     "hooks": {

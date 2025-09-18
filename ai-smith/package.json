@@ -1,0 +1,17 @@
+{
+  "name": "ai-smith",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "landing-page",
+    "ui-smith"
+  ],
+  "scripts": {
+    "dev:landing": "npm run dev --workspace=landing-page",
+    "dev:ui": "npm run dev --workspace=ui-smith",
+    "dev": "npm run dev:landing & npm run dev:ui",
+    "build:landing": "npm run build --workspace=landing-page",
+    "build:ui": "npm run build --workspace=ui-smith",
+    "build": "npm run build:landing && npm run build:ui"
+  }
+}
